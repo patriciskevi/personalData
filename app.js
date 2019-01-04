@@ -1,35 +1,64 @@
-console.log(document.getElementById('myForm').elements)
+console.log(document.getElementById('myForm').elements.gender.value)
+console.log(document.getElementById('myForm').elements.gender[1])
 
 function calcBMI({
     weight,
     height
 }) {
-    return weight / Math.pow((height / 100), 2);
+    return Math.floor(weight / Math.pow((height / 100), 2));
 }
 
-function calcMaxHeartRate({
+function calcMaxHeartRateMaleOther({
     age
 }) {
-    return 220 - age;
+    return Math.floor(220 - age);
+}
+
+function calcMaxHeartRateFemale({
+    age
+}) {
+    return Math.floor(206 - (0.88 * age));
 }
 
 function onSubmit(funcName) {
+
     let element = document.getElementById('myForm').elements;
     let person = {
-        firstName: element[0].value,
-        lastName: element[1].value,
-        height: element[2].value,
-        weight: element[3].value,
-        age: element[4].value,
+        height: element[0].value,
+        weight: element[1].value,
+        age: element[2].value,
     };
     if (funcName == 'calcBMI') {
-        document.getElementById('displayBMI').innerHTML = calcBMI(person);
+
+        const bmi = calcBMI(person);
+        let str = 'Your BMI is ' + bmi;
+        switch (true) {
+            case (bmi < 18.5):
+                str += ', which is classified by the WHO as underweight.';
+                break;
+            case (bmi < 25):
+                str += ', which is classified by the WHO as normal weight.';
+                break;
+            case (bmi < 30):
+                str += ', which is classified by the WHO as overweight.';
+                break;
+            case (bmi < 35):
+                str += ', which is classified by the WHO as class I obesity.';
+                break;
+            case (bmi < 40):
+                str += ', which is classified by the WHO as class II obesity.';
+                break;
+            default:
+                str += ', which is classified by the WHO as class III obesity.';
+                break;
+        }
+        document.getElementById('displayBMI').innerHTML = str;
     } else {
-        document.getElementById('displayMaxHeartrate').innerHTML = 'Your BMI is ' + calcMaxHeartRate(person);
+        if (document.getElementById('myForm').elements.gender.value === 'female') {
+            document.getElementById('displayMaxHeartrate').innerHTML = 'Your max heart rate is ' + calcMaxHeartRateFemale(person) + 'bpm.';
+        } else {
+            document.getElementById('displayMaxHeartrate').innerHTML = 'Your max heart rate is ' + calcMaxHeartRateMaleOther(person) + 'bpm.';
+        }
+
     }
-
 }
-
-// let x = document.getElementById('myForm').elements[4].value;
-// let z = document.getElementById('myForm').elements[2].value;
-// let y = document.getElementById('myForm').elements[3].value;

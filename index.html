@@ -16,14 +16,9 @@
         <section class="form">
 
             <form id="myForm">
-                <label for="firstName">First Name</label>
-                <input type="text" id="firstName" placeholder="Your name">
-
-                <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" placeholder="Your last name">
 
                 <label for="height">Height</label>
-                <input type="text" id="height" placeholder="Your height in cm">
+                <input type="text" id="height" placeholder="Your height in cm" required>
 
                 <label for="weight">Weight</label>
                 <input type="text" id="weight" placeholder="Your weight in kg">
@@ -32,9 +27,9 @@
                 <input type="text" id="age" placeholder="Your age">
 
 
-                <input type="radio" id="female" name="gender" checked> Female <br>
-                <input type="radio" id="male" name="gender"> Male <br>
-                <input type="radio" id="other" name="gender"> Other
+                <input type="radio" id="female" name="gender" value="female"> Female <br>
+                <input type="radio" id="male" name="gender" value="male"> Male <br>
+                <input type="radio" id="other" name="gender" value="other"> Other
                 <div class="buttons">
                     <button type="button" onclick="onSubmit('calcBMI')" id="getBmiButton">Get your BMI</button>
                     <button type="button" onclick="onSubmit('calcMaxHeartRate')" id="getMaxHeartrateButton">Get your
